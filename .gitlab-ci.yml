@@ -28,11 +28,6 @@ push:
   script:
     # Env
     - printenv ${ENV_FILE} > ./.env
-    # Certs
-    - mkdir -p ${DOCKER_CERT_PATH}
-    - printenv ${DOCKER_MACHINE_CA} > ${DOCKER_CERT_PATH}/ca.pem
-    - printenv ${DOCKER_CLIENT_CERT} > ${DOCKER_CERT_PATH}/cert.pem
-    - printenv ${DOCKER_CLIENT_KEY} > ${DOCKER_CERT_PATH}/key.pem
     # Deploy
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - ./cmd/prod.sh push
