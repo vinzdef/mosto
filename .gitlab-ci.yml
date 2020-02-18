@@ -11,9 +11,7 @@ build:
   stage: build
   image: registry.caffeina.co/open-source/docker-gitlab-ci:latest
   before_script:
-    - echo $REGISTRY 
-    - echo $CI_REGISTRY
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $REGISTRY
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN https://registry.gitlab.com
     - printenv $(echo "${CI_COMMIT_REF_NAME}_APP_ENV") > ./.env
     - echo $CI_PROJECT_NAME
   script:
