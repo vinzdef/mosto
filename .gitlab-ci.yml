@@ -1,3 +1,5 @@
+image: docker:19.03.1
+
 stages:
   - build
   - push
@@ -7,12 +9,15 @@ stages:
 variables:
   COMPOSE_PROJECT_NAME: ${PROJECT_NAME}_${CI_COMMIT_REF_NAME}
 
+services:
+  - docker:19.03.1-dind
+
+before_script:
+  - docker info
+
 build:
   stage: build
-  image: registry.caffeina.co/open-source/docker-gitlab-ci:latest
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
+  # image: registry.caffeina.co/open-source/docker-gitlab-ci:latest
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - printenv $(echo "${CI_COMMIT_REF_NAME}_APP_ENV") > ./.env
