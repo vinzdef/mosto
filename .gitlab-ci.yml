@@ -4,23 +4,12 @@ stages:
   - deploy
   - cleanup
 
-variables:
-  DOCKER_HOST: tcp://docker:2375/
-  DOCKER_DRIVER: overlay2
-
-image:
-  name: docker/compose:latest
-  entrypoint: ["/bin/sh", "-c"]
-
-services:
-  - docker:dind
-
-before_script:
-  - sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-  - sudo chmod +x /usr/local/bin/docker-compose
 
 build:
   stage: build
+  image: docker:stable
+  services:
+    - docker:dind
   # image: registry.caffeina.co/open-source/docker-gitlab-ci:latest
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
