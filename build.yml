@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  mysql:
+    build:
+      context: './mysql'
+      dockerfile: ./Dockerfile
+
+  nginx:
+    build:
+      context: './nginx'
+      dockerfile: ./Dockerfile
+
+  wordpress:
+    build:
+      context: './wordpress'
+      dockerfile: ./Dockerfile

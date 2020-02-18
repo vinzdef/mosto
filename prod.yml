@@ -1,0 +1,71 @@
+# REF: https://github.com/mjstealey/wordpress-nginx-docker
+version: '3.5'
+
+volumes:
+  wordpress_data:
+  mysql_data:
+
+networks:
+  internal:
+  front-tier:
+    external:
+      name: front-tier
+
+services:
+  wordpress:
+    image: wordpress:5.3.2-php7.3-fpm
+    volumes:
+      - wordpress_data:/var/www/html/
+    environment:
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG', false);
+    depends_on:
+      - mysql
+    restart: always
+    networks:
+      internal:
+
+  mysql:
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    networks:
+      internal:
+
+  nginx:    
+    environment:
+      VIRTUAL_HOST: cms.${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: cms.${VIRTUAL_HOST}
+    networks:
+      front-tier:
+      internal:
+        aliases:
+          - cms.${VIRTUAL_HOST}
+    volumes:
+      - wordpress_data:/var/www/html/
+    depends_on:
+      - wordpress
+    restart: always
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      VIRTUAL_HOST: phpmyadmin.${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: phpmyadmin.${VIRTUAL_HOST}
+      PMA_HOST: ${WORDPRESS_DB_HOST}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - mysql
+    networks:
+      internal:
+      front-tier:
