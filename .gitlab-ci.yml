@@ -10,8 +10,11 @@ variables:
 build:
   stage: build
   image: registry.caffeina.co/open-source/docker-gitlab-ci:latest
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN https://registry.gitlab.com
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - printenv $(echo "${CI_COMMIT_REF_NAME}_APP_ENV") > ./.env
     - echo $CI_PROJECT_NAME
   script:
