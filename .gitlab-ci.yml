@@ -8,12 +8,14 @@ stages:
 
 variables:
   COMPOSE_PROJECT_NAME: ${PROJECT_NAME}_${CI_COMMIT_REF_NAME}
+  DOCKER_TLS_CERTDIR: ""
 
 services:
   - docker:19.03.1-dind
 
 before_script:
-  - docker info
+  - sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  - sudo chmod +x /usr/local/bin/docker-compose
 
 build:
   stage: build
