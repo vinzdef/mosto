@@ -22,9 +22,7 @@ build:
 
 push:
   stage: push
-  image: registry.caffeina.co/open-source/docker-gitlab-ci:latest
-  variables:
-    COMPOSE_PROJECT_NAME: ${PROJECT_NAME}_${CI_COMMIT_REF_NAME}
+  image: registry.caffeina.co/open-source/docker-gitlab-ci:latest    
   script:
     # Env
     - printenv ${ENV_FILE} > ./.env
@@ -40,6 +38,9 @@ push:
 deploy:
   stage: deploy
   image: registry.caffeina.co/open-source/docker-gitlab-ci:latest  
+  variables: 
+    DOCKER_TLS_VERIFY: "1"
+    DOCKER_CERT_PATH: ./certs
   script:
     # Env
     - printenv ${ENV_FILE} > ./.env
@@ -64,6 +65,9 @@ deploy:
 cleanup:
   stage: cleanup
   image: registry.caffeina.co/open-source/docker-gitlab-ci:latest  
+  variables: 
+    DOCKER_TLS_VERIFY: "1"
+    DOCKER_CERT_PATH: ./certs
   script:
     # Env
     - printenv $(echo "${ENV_FILE") > ./.env
