@@ -12,7 +12,7 @@ build:
   image: registry.caffeina.co/open-source/docker-gitlab-ci:latest
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - printenv ${ENV_FILE} > ./.env
+    - printenv $(echo "${CI_COMMIT_REF_NAME}_APP_ENV") > ./.env
     - echo $CI_PROJECT_NAME
   script:
     - ./cmd/prod.sh build
