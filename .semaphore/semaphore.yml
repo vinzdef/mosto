@@ -26,7 +26,7 @@ blocks:
             - ./cmd/build.sh push
 
   - name: Deploy
-    dependencies: ["Push"]
+    dependencies: ["Build", "Push"]
     task:
       jobs:
         - name: Deploy
