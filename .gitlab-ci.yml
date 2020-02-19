@@ -8,17 +8,14 @@ stages:
 build:
   stage: build
   image: docker:stable
-  services:
-    - docker:dind
   variables:
-    DOCKER_DRIVER: overlay2
+    # Use TLS https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
 
-  # image: registry.caffeina.co/open-source/docker-gitlab-ci:latest
   before_script:
-    # - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
-    - printenv $(echo "${CI_COMMIT_REF_NAME}_APP_ENV") > ./.env
-    - echo $CI_PROJECT_NAME
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - echo ${PROJECT_NAME}
   script:
     - ./cmd/prod.sh build
   only:
