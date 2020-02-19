@@ -10,17 +10,33 @@ blocks:
   - name: Pour
     task:
       jobs:
-        - name: Build & Push
+        - name: Build
+          env_vars:
+            - name: BRANCH
+              value: $SEMAPHORE_GIT_BRANCH
+            - name: PROJECT_PATHNAME
+              value: $SEMAPHORE_GIT_REPO_SLUG
+            - name: REVISION
+              value: $SEMAPHORE_GIT_SHA
+            - name: REGISTRY_HOST
+              value: registry.ghzmdr.tk
           commands:
-            - export BRANCH=$SEMAPHORE_GIT_BRANCH
-            - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
-            - export REVISION=$SEMAPHORE_GIT_SHA
-            - export REGISTRY_HOST=registry.ghzmdr.tk
-            - echo $BRANCH
-            - echo $PROJECT_PATHNAME
-            - echo $REVISION
-            - echo $REGISTRY_HOST
             - checkout
-            - ls -l
             - docker-compose -f build.yml build
+
+        - name: Push
+          commands:
             - docker-compose -f build.yml push
+
+        - name: Deploy
+          env_vars:
+            - name: COMPOSE_PROJECT_NAME
+              value: $SEMAPHORE_GIT_REPO_SLUG
+            - name: DOCKER_TLS_VERIFY
+              value: 1
+            - name: DOCKER_CERT_PATH
+              value: './certs'
+          secrets:
+            - name: TESTING_DOCKER_MACHINE
+          commands:
+            - docker-compose -f build.yml -f prod.yml up -d --remove-orphans

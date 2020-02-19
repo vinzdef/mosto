@@ -1,5 +1,6 @@
 #!/bin/bash
+export BRANCH=development
+export PROJECT_PATHNAME=stucco
+export REVISION=latest
 export REGISTRY_HOST=localhost
-export PROJECT_PATH=localhost
-export GIT_REF=development
 docker-compose -f build.yml -f dev.yml $@
