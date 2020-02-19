@@ -24,7 +24,7 @@ blocks:
             - docker-compose -f build.yml push
 
   - name: Deploy
-    dependencies: ["Push"]
+    dependencies: ["Build"]
     task:
       secrets:
         - name: TESTING_DOCKER_MACHINE
