@@ -33,7 +33,7 @@ blocks:
             - name: COMPOSE_PROJECT_NAME
               value: $SEMAPHORE_GIT_REPO_SLUG
             - name: DOCKER_TLS_VERIFY
-              value: 1
+              value: '1'
             - name: DOCKER_CERT_PATH
               value: './certs'
           secrets:
