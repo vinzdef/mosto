@@ -12,9 +12,9 @@ blocks:
       jobs:
         - name: Build & Push
           commands:
-            - export BRANCH=$BRANCH_NAME
-            - export PROJECT_PATHNAME=$SEMAPHORE_REPO_SLUG
-            - export REVISION=$REVISION
+            - export BRANCH=$SEMAPHORE_GIT_BRANCH
+            - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
+            - export REVISION=$SEMAPHORE_GIT_SHA
             - export REGISTRY_HOST=registry.ghzmdr.tk
             - echo $BRANCH
             - echo $PROJECT_PATHNAME
