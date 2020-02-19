@@ -46,4 +46,5 @@ blocks:
             - ls $DOCKER_CERT_PATH
             - checkout
             - cp $ENV_PATH/.env.prod .env
+            - docker-compose -f build.yml pull
             - docker-compose -f build.yml -f prod.yml up -d --remove-orphans
