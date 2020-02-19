@@ -37,8 +37,8 @@ blocks:
             - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
             - export REVISION=$SEMAPHORE_GIT_SHA
             - export REGISTRY_HOST="registry.$MACHINE_HOSTNAME"
-            - export COMPOSE_PROJECT_NAME="$SEMAPHORE_GIT_DIR.$BRANCH"
-            - export VIRTUAL_HOST="$COMPOSE_PROJECT_NAME.$MACHINE_HOSTNAME"
+            - export COMPOSE_PROJECT_NAME="${BRANCH}_${SEMAPHORE_GIT_DIR}"
+            - export VIRTUAL_HOST="${BRANCH}.${SEMAPHORE_GIT_DIR}.${MACHINE_HOSTNAME}"
             - checkout
             - cp $ENV_PATH/.env.prod .env
             - docker-compose -f build.yml pull
