@@ -12,13 +12,11 @@ blocks:
     task:
       jobs:
         - name: Build & Push
-          env_vars:
-            - name: REGISTRY_HOST
-              value: registry.ghzmdr.tk
           commands:
             - export BRANCH=$SEMAPHORE_GIT_BRANCH
             - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
             - export REVISION=$SEMAPHORE_GIT_SHA
+            - export REGISTRY_HOST="registry.$MACHINE_HOSTNAME"
             - checkout
             - docker-compose -f build.yml build
             - docker-compose -f build.yml push
@@ -31,19 +29,16 @@ blocks:
         - name: STUCCO
       jobs:
         - name: Deploy
-          env_vars:            
+          env_vars:
             - name: DOCKER_TLS_VERIFY
-              value: '1'          
-            - name: REGISTRY_HOST
-              value: registry.ghzmdr.tk            
-          commands:            
+              value: '1'
+          commands:
             - export BRANCH=$SEMAPHORE_GIT_BRANCH
             - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
             - export REVISION=$SEMAPHORE_GIT_SHA
-            - export COMPOSE_PROJECT_NAME=$SEMAPHORE_GIT_REPO_SLUG
-            - export DOCKER_CERT_PATH=$DOCKER_CERT_PATH
-            - echo $DOCKER_CERT_PATH
-            - ls $DOCKER_CERT_PATH
+            - export REGISTRY_HOST="registry.$MACHINE_HOSTNAME"
+            - export COMPOSE_PROJECT_NAME="$SEMAPHORE_GIT_DIR.$BRANCH"
+            - export VIRTUAL_HOST="$COMPOSE_PROJECT_NAME.$MACHINE_HOSTNAME"
             - checkout
             - cp $ENV_PATH/.env.prod .env
             - docker-compose -f build.yml pull
