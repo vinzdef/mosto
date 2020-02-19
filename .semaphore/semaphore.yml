@@ -8,7 +8,8 @@ agent:
 
 blocks:
   - name: Build
-    task:      
+    dependencies: []
+    task:
       jobs:
         - name: Build
           env_vars:
