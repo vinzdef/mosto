@@ -35,9 +35,7 @@ blocks:
             - name: DOCKER_TLS_VERIFY
               value: '1'          
             - name: REGISTRY_HOST
-              value: registry.ghzmdr.tk
-            - name: DOCKER_HOST
-              value: tcp://ghzmdr.tk:2376
+              value: registry.ghzmdr.tk            
           commands:            
             - export BRANCH=$SEMAPHORE_GIT_BRANCH
             - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
