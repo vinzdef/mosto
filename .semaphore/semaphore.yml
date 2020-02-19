@@ -12,6 +12,7 @@ blocks:
       jobs:
         - name: Build & Push
           commands:
+            - set -ex
             - export BRANCH=$BRANCH_NAME
             - export PROJECT_PATHNAME=$SEMAPHORE_REPO_SLUG
             - export REVISION=$REVISION
