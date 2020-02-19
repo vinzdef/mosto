@@ -17,6 +17,10 @@ blocks:
             - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
             - export REVISION=$SEMAPHORE_GIT_SHA
             - export REGISTRY_HOST="registry.$MACHINE_HOSTNAME"
+            - echo $BRANCH
+            - echo $PROJECT_PATHNAME
+            - echo $REVISION
+            - echo $REGISTRY_HOST
             - checkout
             - docker-compose -f build.yml build
             - docker-compose -f build.yml push
