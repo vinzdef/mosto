@@ -8,25 +8,12 @@ agent:
       image: 'docker/compose'
 
 blocks:
-  - name: Build
+  - name: Pour
     task:
       jobs:
-        - name: Build
+        - name: Build & Push
           commands:
             - checkout
             - ls -l
             - ./cmd/build.sh build
-            
-  - name: Push
-    task:
-      jobs:
-        - name: Push
-          commands:
             - ./cmd/build.sh push
-
-  - name: Deploy
-    task:
-      jobs:
-        - name: Deploy
-          commands:
-            - echo "Deploy"
