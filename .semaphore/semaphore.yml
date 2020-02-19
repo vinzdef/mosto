@@ -25,14 +25,16 @@ blocks:
             - docker-compose -f build.yml build
 
   - name: Push
-    tasks:
+    dependencies: ["Build"]
+    task:
       jobs:
         - name: Push
           commands:
             - docker-compose -f build.yml push
 
   - name: Deploy
-    tasks:
+    dependencies: ["Build", "Push"]
+    task:
       secrets:
         - name: TESTING_DOCKER_MACHINE
         - name: STUCCO
