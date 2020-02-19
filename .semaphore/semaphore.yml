@@ -10,6 +10,8 @@ blocks:
   - name: Build
     dependencies: []
     task:
+      secrets:
+        - name: TESTING_DOCKER_MACHINE
       jobs:
         - name: Build & Push
           commands:
