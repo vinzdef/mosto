@@ -13,6 +13,7 @@ networks:
 
 services:
   wordpress:
+    container_name: ${COMPOSE_PROJECT_NAME}_wordpress
     volumes:
       - wordpress_data:/var/www/html/
       - ./wordpress/wp-content:/var/www/html/wp-content
@@ -31,6 +32,7 @@ services:
       internal:
 
   mysql:
+    container_name: ${COMPOSE_PROJECT_NAME}_mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
@@ -41,7 +43,8 @@ services:
     networks:
       internal:
 
-  nginx:    
+  nginx:
+    container_name: ${COMPOSE_PROJECT_NAME}_nginx
     environment:
       VIRTUAL_HOST: cms.${VIRTUAL_HOST}
     networks:
@@ -56,6 +59,7 @@ services:
     restart: always
   
   phpmyadmin:
+    container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
     image: phpmyadmin/phpmyadmin
     restart: always
     environment:
