@@ -15,5 +15,4 @@ blocks:
       jobs:
         - name: Test job
           commands:
-            - checkout # Check out the code
-            - echo "Hello from my 'main' container"
+            - ./cmd/prod.sh build
