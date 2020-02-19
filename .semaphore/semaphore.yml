@@ -18,7 +18,6 @@ blocks:
             - ./cmd/build.sh build
             
   - name: Push
-    dependencies: ["Build"]
     task:
       jobs:
         - name: Push
@@ -26,7 +25,6 @@ blocks:
             - ./cmd/build.sh push
 
   - name: Deploy
-    dependencies: ["Build", "Push"]
     task:
       jobs:
         - name: Deploy
