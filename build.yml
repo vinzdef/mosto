@@ -2,19 +2,19 @@ version: '3.5'
 
 services:
   mysql:
-    image: '${REGISTRY_HOST}/${PROJECT_PATHNAME}/${GIT_REF}/mysql'
+    image: '${REGISTRY_HOST}/${PROJECT_PATHNAME}/${BRANCH}/mysql:${REVISION}'
     build:
       context: './mysql'
       dockerfile: ./Dockerfile
 
   nginx:
-    image: '${REGISTRY_HOST}/${PROJECT_PATHNAME}/${GIT_REF}/nginx'
+    image: '${REGISTRY_HOST}/${PROJECT_PATHNAME}/${BRANCH}/nginx:${REVISION}'
     build:
       context: './nginx'
       dockerfile: ./Dockerfile
 
   wordpress:
-    image: '${REGISTRY_HOST}/${PROJECT_PATHNAME}/${GIT_REF}/wordpress'
+    image: '${REGISTRY_HOST}/${PROJECT_PATHNAME}/${BRANCH}/wordpress:${REVISION}'
     build:
       context: './wordpress'
       dockerfile: ./Dockerfile
