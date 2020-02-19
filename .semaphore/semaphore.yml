@@ -7,11 +7,8 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  - name: Pour
-    task:
-      secrets:
-        - name: TESTING_DOCKER_MACHINE
-        - name: STUCCO
+  - name: Build
+    task:      
       jobs:
         - name: Build
           env_vars:
@@ -27,10 +24,19 @@ blocks:
             - checkout
             - docker-compose -f build.yml build
 
+  - name: Push
+    tasks:
+      jobs:
         - name: Push
           commands:
             - docker-compose -f build.yml push
 
+  - name: Deploy
+    tasks:
+      secrets:
+        - name: TESTING_DOCKER_MACHINE
+        - name: STUCCO
+      jobs:
         - name: Deploy
           env_vars:
             - name: COMPOSE_PROJECT_NAME
