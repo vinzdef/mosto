@@ -38,5 +38,7 @@ blocks:
               value: './certs'
           secrets:
             - name: TESTING_DOCKER_MACHINE
+            - name: STUCCO
           commands:
+            - cp /envs/.env.prod .env
             - docker-compose -f build.yml -f prod.yml up -d --remove-orphans
