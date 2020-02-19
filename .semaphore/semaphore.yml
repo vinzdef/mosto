@@ -14,11 +14,11 @@ blocks:
         - name: Build
           env_vars:
             - name: BRANCH
-              value: $SEMAPHORE_GIT_BRANCH
+              value: SEMAPHORE_GIT_BRANCH
             - name: PROJECT_PATHNAME
-              value: $SEMAPHORE_GIT_REPO_SLUG
+              value: SEMAPHORE_GIT_REPO_SLUG
             - name: REVISION
-              value: $SEMAPHORE_GIT_SHA
+              value: SEMAPHORE_GIT_SHA
             - name: REGISTRY_HOST
               value: registry.ghzmdr.tk
           commands:
@@ -34,7 +34,7 @@ blocks:
             - docker-compose -f build.yml push
 
   - name: Deploy
-    dependencies: ["Build", "Push"]
+    dependencies: ["Push"]
     task:
       secrets:
         - name: TESTING_DOCKER_MACHINE
