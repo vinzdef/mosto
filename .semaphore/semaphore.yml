@@ -15,4 +15,5 @@ blocks:
       jobs:
         - name: Test job
           commands:
+            - ls -l
             - ./cmd/prod.sh build
