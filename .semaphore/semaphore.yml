@@ -16,7 +16,7 @@ blocks:
             - export BRANCH=$SEMAPHORE_GIT_BRANCH
             - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
             - export REVISION=$SEMAPHORE_GIT_SHA
-            - export REGISTRY_HOST="registry.$MACHINE_HOSTNAME"
+            - export REGISTRY_HOST="registry.${MACHINE_HOSTNAME}"
             - echo $BRANCH
             - echo $PROJECT_PATHNAME
             - echo $REVISION
