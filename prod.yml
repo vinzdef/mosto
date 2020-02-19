@@ -13,7 +13,6 @@ networks:
 
 services:
   wordpress:
-    image: wordpress:5.3.2-php7.3-fpm
     volumes:
       - wordpress_data:/var/www/html/
     environment:
