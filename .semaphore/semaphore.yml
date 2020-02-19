@@ -15,5 +15,6 @@ blocks:
       jobs:
         - name: Test job
           commands:
+            - checkout
             - ls -l
             - ./cmd/prod.sh build
