@@ -11,7 +11,7 @@ blocks:
     dependencies: []
     task:
       jobs:
-        - name: Build
+        - name: Build & Push
           env_vars:
             - name: REGISTRY_HOST
               value: registry.ghzmdr.tk
@@ -21,13 +21,6 @@ blocks:
             - export REVISION=$SEMAPHORE_GIT_SHA
             - checkout
             - docker-compose -f build.yml build
-
-  - name: Push
-    dependencies: ["Build"]
-    task:
-      jobs:
-        - name: Push
-          commands:
             - docker-compose -f build.yml push
 
   - name: Deploy
@@ -46,5 +39,6 @@ blocks:
             - name: DOCKER_CERT_PATH
               value: './certs'          
           commands:
+            - checkout
             - cp $ENV_PATH/.env.prod .env
             - docker-compose -f build.yml -f prod.yml up -d --remove-orphans
