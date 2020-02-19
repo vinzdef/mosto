@@ -13,15 +13,12 @@ blocks:
       jobs:
         - name: Build
           env_vars:
-            - name: BRANCH
-              value: SEMAPHORE_GIT_BRANCH
-            - name: PROJECT_PATHNAME
-              value: SEMAPHORE_GIT_REPO_SLUG
-            - name: REVISION
-              value: SEMAPHORE_GIT_SHA
             - name: REGISTRY_HOST
               value: registry.ghzmdr.tk
           commands:
+            - export BRANCH=$SEMAPHORE_GIT_BRANCH
+            - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
+            - export REVISION=$SEMAPHORE_GIT_SHA
             - checkout
             - docker-compose -f build.yml build
 
