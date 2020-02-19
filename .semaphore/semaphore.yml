@@ -14,6 +14,8 @@ blocks:
           commands:
             - export BRANCH=$BRANCH_NAME
             - export PROJECT_PATHNAME=$SEMAPHORE_REPO_SLUG
+            - export REVISION=$REVISION
+            - export REGISTRY_HOST=registry.ghzmdr.tk
             - checkout
             - ls -l
             - docker-compose -f build.yml build
