@@ -9,6 +9,9 @@ agent:
 blocks:
   - name: Pour
     task:
+      secrets:
+        - name: TESTING_DOCKER_MACHINE
+        - name: STUCCO
       jobs:
         - name: Build
           env_vars:
@@ -35,10 +38,7 @@ blocks:
             - name: DOCKER_TLS_VERIFY
               value: '1'
             - name: DOCKER_CERT_PATH
-              value: './certs'
-          secrets:
-            - name: TESTING_DOCKER_MACHINE
-            - name: STUCCO
+              value: './certs'          
           commands:
             - cp /envs/.env.prod .env
             - docker-compose -f build.yml -f prod.yml up -d --remove-orphans
