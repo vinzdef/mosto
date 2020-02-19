@@ -40,5 +40,5 @@ blocks:
             - name: DOCKER_CERT_PATH
               value: './certs'          
           commands:
-            - cp /envs/.env.prod .env
+            - cp $ENV_PATH/.env.prod .env
             - docker-compose -f build.yml -f prod.yml up -d --remove-orphans
