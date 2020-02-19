@@ -7,24 +7,24 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  # - name: Build
-  #   dependencies: []
-  #   task:
-  #     jobs:
-  #       - name: Build & Push
-  #         env_vars:
-  #           - name: REGISTRY_HOST
-  #             value: registry.ghzmdr.tk
-  #         commands:
-  #           - export BRANCH=$SEMAPHORE_GIT_BRANCH
-  #           - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
-  #           - export REVISION=$SEMAPHORE_GIT_SHA
-  #           - checkout
-  #           - docker-compose -f build.yml build
-  #           - docker-compose -f build.yml push
+  - name: Build
+    dependencies: []
+    task:
+      jobs:
+        - name: Build & Push
+          env_vars:
+            - name: REGISTRY_HOST
+              value: registry.ghzmdr.tk
+          commands:
+            - export BRANCH=$SEMAPHORE_GIT_BRANCH
+            - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
+            - export REVISION=$SEMAPHORE_GIT_SHA
+            - checkout
+            - docker-compose -f build.yml build
+            - docker-compose -f build.yml push
 
   - name: Deploy
-    # dependencies: ["Build"]
+    dependencies: ["Build"]
     task:
       secrets:
         - name: TESTING_DOCKER_MACHINE
@@ -33,8 +33,13 @@ blocks:
         - name: Deploy
           env_vars:            
             - name: DOCKER_TLS_VERIFY
-              value: '1'
+              value: '1'          
+            - name: REGISTRY_HOST
+              value: registry.ghzmdr.tk
           commands:
+            - export BRANCH=$SEMAPHORE_GIT_BRANCH
+            - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
+            - export REVISION=$SEMAPHORE_GIT_SHA
             - export COMPOSE_PROJECT_NAME=$SEMAPHORE_GIT_REPO_SLUG
             - export DOCKER_CERT_PATH=$DOCKER_CERT_PATH
             - echo $DOCKER_CERT_PATH
