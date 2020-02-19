@@ -1,0 +1,18 @@
+version: v1.0
+name: Pouring
+
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Pour
+    task:
+      jobs:
+        - name: Build & Push
+          commands:
+            - checkout
+            - ls -l
+            - ./cmd/build.sh build
+            - ./cmd/build.sh push
