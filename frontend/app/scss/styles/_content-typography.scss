@@ -1,0 +1,56 @@
+// =============================================================================
+//   Content typography and styles
+//  ============================================================================
+%typography {
+    overflow-wrap: break-word;
+    color: $color-text;
+    word-wrap: break-word;
+
+    a {
+        color: $color-link;
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    p {
+        margin-top: 0;
+    }
+
+    ol,
+    ul {
+        overflow: hidden;
+        margin-top: 0.1em;
+        padding: 0;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin-right: auto;
+        margin-bottom: 1em;
+        margin-left: auto;
+    }
+
+    strong {
+        text-transform: uppercase;
+        font-size: font-size(s);
+        font-weight: font-weight(light);
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    blockquote {
+        margin-bottom: 2em;
+
+        // p {
+        //     @extend .h6;
+        // }
+
+        // strong {
+        // }
+    }
+}

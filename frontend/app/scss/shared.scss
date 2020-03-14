@@ -1,0 +1,13 @@
+
+@import "~sass-mq/mq";
+@import "./styles/colors";
+@import "./styles/globals";
+@import "./styles/mixins";
+@import "./styles/fonts";
+
+.test-enter-active, .test-leave-active {
+  transition: opacity 10.5s
+}
+.test-enter, .test-leave-active {
+  opacity: 0
+}

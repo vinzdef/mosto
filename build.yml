@@ -18,3 +18,9 @@ services:
     build:
       context: './wordpress'
       dockerfile: ./Dockerfile
+
+  frontend:
+    image: '${REGISTRY_HOST}/${PROJECT_PATHNAME}/${BRANCH}/frontend:${REVISION}'
+    build:
+      context: './frontend'
+      dockerfile: ./Dockerfile

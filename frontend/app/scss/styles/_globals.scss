@@ -1,0 +1,58 @@
+//global configs
+$rem-to-px-fallback: false !default;
+
+//use custom grid
+$grid-enabled: true;
+
+$mq-breakpoints: (
+    xs: 480px,
+    sm: 768px,
+    md: 1025px,
+    lg: 1200px
+);
+$layers: (
+    behind: -1,
+    below: -1,
+    base: 0,
+    above: 1,
+    middle: 5,
+    scrollbar: 19,
+    cart: 21,
+    modal: 22,
+    footer: 23,
+    header: 25,
+    menu: 24,
+    contacts: 98,
+    loader: 99,
+);
+
+$line-width: 30px;
+
+$extra-small-margin: 8px;
+
+$small-margin-mobile: 10px;
+$small-margin: 20px;
+
+$standard-margin-mobile: 30px;
+$standard-margin: 40px;
+
+$medium-margin: 80px;
+
+$big-margin-mobile: 40px;
+$big-margin: 120px;
+
+$rem-margin-mobile: 2rem;
+$rem-margin: 4rem;
+
+$viewport-margin-mobile: 6rem;
+$viewport-margin: 12rem;
+
+$big-button-size: 95px;
+$big-button-size-mobile: 75px;
+
+//PSD base viewport size
+// $viewport-width: 1280px;
+// $viewport-height: 720px;
+
+$container-width: 1200px;
+$maximum-width: 1600px;

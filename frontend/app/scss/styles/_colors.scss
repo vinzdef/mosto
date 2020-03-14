@@ -1,0 +1,16 @@
+$color-light: #ffffff;
+$color-dark: #000000;
+
+$color-background: #fff;
+$color-background-dark: #fff;
+$color-text: #fff;
+$color-accent: #fff;
+
+//colors by function
+$color-text: $color-light;
+$color-background: $color-background;
+$color-border: $color-background;
+$color-link: $color-accent;
+$color-link-hover: $color-accent;
+$color-text-selection: $color-background-dark;
+$color-highlight: $color-dark;

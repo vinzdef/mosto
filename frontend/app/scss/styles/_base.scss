@@ -1,0 +1,370 @@
+/* ==========================================================================
+
+   Base Styles
+   ====
+
+
+   Some Basic Styles
+
+   ```
+   ```
+
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-display: auto;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    z-index: inherit;
+}
+
+:root {
+    --color-background: #{ $color-background };
+    --color-accent: #{ $color-accent };
+    --color-dark: #{ $color-background-dark };
+    --color-text: #{ $color-text };
+}
+
+html,
+body {
+    margin: 0;
+}
+
+html {
+    font-size: percentage($font-size-mobile / 16px); //16px
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @include mq(md) {
+        font-size: percentage($font-size-default / 16px); //16px
+    }
+}
+
+body {
+    background-color: var(--color-background);
+    line-height: $font-lheight;
+    font-size: percentage($font-size-default / 16px);
+    font-family: $font-family-base;
+    font-weight: font-weight(light);
+    color: v(color-text);
+    overflow-x: hidden;
+}
+
+button {
+    border: none;
+    background: transparent;
+    padding: 5px;
+    cursor: pointer;
+    font-family: $font-family-base;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+a {
+    text-decoration: none;
+    font-family: $font-family-base;
+}
+
+b {
+    display: inline-block;
+}
+
+blockquote {
+    margin: 0;
+}
+
+//Remove text-shadow in selection highlight: h5bp.com/i
+//These selection declarations have to be separate.
+//Customize the background color to match your design.
+
+::-moz-selection { // scss-lint:disable VendorPrefix
+    background: $color-text-selection;
+    color: $color-background-dark;
+    text-shadow: none;
+}
+
+::selection {
+    background: $color-text-selection;
+    color: $color-background-dark;
+    text-shadow: none;
+}
+
+// Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+
+audio,
+canvas,
+iframe,
+svg,
+video,
+img {
+    vertical-align: middle;
+}
+
+// A better looking default horizontal rule
+
+hr {
+    display: block;
+    height: 1px;
+    margin: 1rem 0;
+    padding: 0;
+    border: 0;
+}
+
+ul,
+li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+// Remove default fieldset styles.
+
+fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+// Allow only vertical resizing of textareas.
+
+textarea {
+    resize: vertical;
+}
+
+input::-moz-focus-inner {
+    border: 0;
+}
+
+/* ==========================================================================
+   ##prevent 300ms delay in FF, Chrome and IE on touch devices
+   ========================================================================== */
+
+a[href], // scss-lint:disable QualifyingElement
+button {
+    touch-action: manipulation;
+}
+
+/* ==========================================================================
+   ##Headings and Base
+
+   1 to 6 heading
+
+   ```
+   ```
+========================================================================== */
+
+p {
+    margin: 0 0 0.2em;
+    line-height: $font-lheight;
+}
+
+strong {
+    font-weight: font-weight(bold);
+}
+
+
+a:not([class])
+a:not([class]):visited,
+.link,
+.link:visited {
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0.5px;
+  color: v(color-text);
+  text-decoration: none;
+  font-size: font-size(13);
+  padding: 2px 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-weight: font-weight(bold);
+  padding: 5px 0;
+  outline: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease-out;
+
+  @include mq(md) {
+    font-size: font-size(s);
+  }
+
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    margin: auto;
+    background: v(color-text);
+    transition: all 0.65s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform-origin: 0 0;
+    transform: scale(1, 1);
+  }
+
+  &::before {
+    transform-origin: 100% 0;
+    transform: scale(0, 1);
+  }
+
+  @at-root .no-touchevents &:hover,
+  &.is-active {
+    &::after {
+        transform: scale(0, 1)
+    }
+
+    &::before {
+        transform: scale(0.5, 1)
+    }
+  }
+}
+
+.link--dark,
+.link--dark:visited {
+    color: v(color-accent);
+
+    &::after,
+    &::before {
+        background: v(color-accent);
+    }
+}
+
+/* ==========================================================================
+   ## scrollbar
+========================================================================== */
+
+.scrollbar {
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+#smoothie {
+    height: 100vh;
+    width: 100%;
+}
+
+.split-text-enter {
+    overflow: hidden;
+}
+
+// .scrollbar-track {
+//     display: none !important;
+// }
+
+
+/* ==========================================================================
+   ## various
+========================================================================== */
+
+.svg-sprites {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.container-column {
+    max-width: $maximum-width;
+    margin: 0 auto;
+    position: relative;
+}
+
+.container-spacer {
+    position: relative;
+    margin-bottom: 10vh;
+
+    @include mq(sm) {
+        margin-bottom: 20vh;
+    }
+}
+
+.padded-top {
+
+    @include mq(sm) {
+        padding-top: $big-margin;
+    }
+}
+
+[data-anim] {
+    @include boost-performance();
+}
+
+#listing-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    pointer-events: none;
+    backface-visibility: hidden;
+
+    canvas {
+        backface-visibility: hidden;
+    }
+}
+
+/* ==========================================================================
+   ## CSS to JS Breakpoint Bridge
+========================================================================== */
+
+body::after,
+body::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: z-index(behind) - 2;
+    display: block;
+    visibility: hidden;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+}
+
+body::after {
+    content: 'xs';
+
+    @each $mq-key, $mq-value in $mq-breakpoints {
+        @include mq($mq-key) {
+            content: '#{$mq-key}';
+        }
+    }
+}
+
+body::before {
+    content: '/#{map-to-JSON($mq-breakpoints)}/'; // scss-lint:disable NameFormat
+}
+
+//fallback
+head {
+    font-family: '/#{map-to-JSON($mq-breakpoints)}/'; // scss-lint:disable NameFormat
+}
+
+
+[data-cloak="true"] {
+    opacity: 0;
+    visibility: hidden;
+}
+
+a.nuxt-link-exact-active {
+    pointer-events: none;
+
+    @include mq($until:sm) {
+        color: v(color-accent) !important;
+    }
+}
+

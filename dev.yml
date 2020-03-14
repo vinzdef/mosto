@@ -57,17 +57,29 @@ services:
     depends_on:
       - wordpress
     restart: always
-  
-  phpmyadmin:
-    container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
-    image: phpmyadmin/phpmyadmin
+
+  adminer:
+    container_name: ${COMPOSE_PROJECT_NAME}_adminer
+    image: adminer
     restart: always
     environment:
-      PMA_HOST: ${WORDPRESS_DB_HOST}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      VIRTUAL_HOST: phpmyadmin.${VIRTUAL_HOST}
+      VIRTUAL_HOST: adminer.${VIRTUAL_HOST}
     depends_on:
       - mysql
+    networks:
+      internal:
+      front-tier:
+
+  frontend:
+    container_name: ${COMPOSE_PROJECT_NAME}_frontend
+    command: dev
+    restart: always
+    volumes:
+      - ./frontend/app:/app
+    environment:
+      VIRTUAL_PORT: 3000
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
     networks:
       internal:
       front-tier:
