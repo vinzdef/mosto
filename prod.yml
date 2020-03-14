@@ -74,6 +74,8 @@ services:
   frontend:
     container_name: ${COMPOSE_PROJECT_NAME}_frontend
     command: start
+    expose: 
+      - 3000
     restart: always
     environment:
       VIRTUAL_PORT: 3000

@@ -74,6 +74,8 @@ services:
   frontend:
     container_name: ${COMPOSE_PROJECT_NAME}_frontend
     command: dev
+    expose: 
+      - 3000
     restart: always
     volumes:
       - ./frontend/app:/app
