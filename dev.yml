@@ -16,7 +16,7 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_wordpress
     volumes:
       - wordpress_data:/var/www/html/
-      - ./wordpress/wp-content:/var/www/html/wp-content
+      - ./wordpress/app/wp-content:/var/www/html/wp-content
     environment:
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
       WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
