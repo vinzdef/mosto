@@ -46,26 +46,25 @@ services:
   nginx:
     container_name: ${COMPOSE_PROJECT_NAME}_nginx
     environment:
-      VIRTUAL_HOST: cms.${VIRTUAL_HOST}
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
     networks:
       front-tier:
       internal:
         aliases:
-          - cms.${VIRTUAL_HOST}
+          - ${VIRTUAL_HOST}
     volumes:
       - wordpress_data:/var/www/html/
     depends_on:
       - wordpress
     restart: always
   
-  phpmyadmin:
-    container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
-    image: phpmyadmin/phpmyadmin
+  adminer:
+    container_name: ${COMPOSE_PROJECT_NAME}_adminer
+    image: adminer
     restart: always
     environment:
-      PMA_HOST: ${WORDPRESS_DB_HOST}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      VIRTUAL_HOST: phpmyadmin.${VIRTUAL_HOST}
+      VIRTUAL_HOST: adminer.${VIRTUAL_HOST}
     depends_on:
       - mysql
     networks:
