@@ -1,0 +1,39 @@
+base[data-lazy] {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  outline: none;
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    border: 0 none;
+
+    &.preview {
+      filter: blur(2vw);
+      transform: scale(1.05);
+    }
+
+    &.reveal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      will-change: transform, opacity;
+      animation: progressiveReveal 1s ease-out;
+    }
+  }
+}
+
+@keyframes progressiveReveal {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

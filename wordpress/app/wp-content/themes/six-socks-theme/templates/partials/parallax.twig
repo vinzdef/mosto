@@ -1,0 +1,6 @@
+<div>
+  {% for parallax in layout.parallax %}
+    {{ parallax.image.src('medium') }}
+    <img src="{{ parallax.image.src }}" />
+  {% endfor %}
+</div>

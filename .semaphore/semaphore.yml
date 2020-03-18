@@ -1,0 +1,51 @@
+version: v1.0
+name: Pouring
+
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Build
+    dependencies: []
+    task:
+      secrets:
+        - name: TESTING_DOCKER_MACHINE
+      jobs:
+        - name: Build & Push
+          commands:
+            - export BRANCH=$SEMAPHORE_GIT_BRANCH
+            - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
+            - export REVISION=$SEMAPHORE_GIT_SHA
+            - export REGISTRY_HOST="registry.${MACHINE_HOSTNAME}"
+            - echo $BRANCH
+            - echo $PROJECT_PATHNAME
+            - echo $REVISION
+            - echo $REGISTRY_HOST
+            - checkout
+            - docker-compose -f build.yml build
+            - docker-compose -f build.yml push
+
+  - name: Deploy
+    dependencies: ["Build"]
+    task:
+      secrets:
+        - name: TESTING_DOCKER_MACHINE
+        - name: STUCCO
+      jobs:
+        - name: Deploy
+          env_vars:
+            - name: DOCKER_TLS_VERIFY
+              value: '1'
+          commands:
+            - export BRANCH=$SEMAPHORE_GIT_BRANCH
+            - export PROJECT_PATHNAME=$SEMAPHORE_GIT_REPO_SLUG
+            - export REVISION=$SEMAPHORE_GIT_SHA
+            - export REGISTRY_HOST="registry.$MACHINE_HOSTNAME"
+            - export COMPOSE_PROJECT_NAME="${SEMAPHORE_GIT_DIR}_${BRANCH}"
+            - export VIRTUAL_HOST="${BRANCH}.${SEMAPHORE_GIT_DIR}.${MACHINE_HOSTNAME}"
+            - checkout
+            - cp $ENV_PATH/.env.prod .env
+            - docker-compose -f build.yml pull
+            - docker-compose -f build.yml -f prod.yml up -d --remove-orphans

@@ -1,0 +1,17 @@
+{% if is_preview %}
+    <p>I will only appear in the editor.</p>
+{% endif %}
+
+<div class="c-slides">
+  <div style="background: {{fields.group_content.background}}">
+    <h1>{{ fields.group_content.title }}</h1>
+    <p>{{ fields.group_content.content }}</p>
+  </div>
+  <div style="background: {{fields.group_slides.background}}">
+    <div>
+      {% for slide in fields.group_slides.slides %}
+        <img src="{{slide.image.url}}" alt="">
+      {% endfor %}
+    </div>
+  </div>
+</div>

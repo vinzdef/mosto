@@ -1,0 +1,47 @@
+//global configs
+$rem-to-px-fallback: false !default;
+
+//use custom grid
+$grid-enabled: true;
+
+$mq-breakpoints: (
+  xs: 480px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px
+);
+
+$layers: (
+  behind: -2,
+  below: -1,
+  base: 0,
+  above: 1,
+  middle: 5,
+  scrollbar: 19,
+  cart: 21,
+  modal: 22,
+  footer: 23,
+  header: 29,
+  menu: 30,
+  zoom: 90,
+  loader: 99,
+  lightbox: 1500
+);
+
+$extra-small-margin: 10px;
+
+$small-margin: 30px;
+$mobile-small-margin: 16px;
+
+$standard-margin: 60px;
+
+$medium-margin: 80px;
+
+$big-margin: 120px;
+
+$rem-margin: 4rem;
+
+$viewport-margin: 12rem;
+
+$container-width: 820px;
+$maximum-width: 1280px;

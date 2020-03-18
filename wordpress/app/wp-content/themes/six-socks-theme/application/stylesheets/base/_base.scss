@@ -1,0 +1,391 @@
+/* ==========================================================================
+
+Base Styles
+====
+
+
+Some Basic Styles
+
+```
+```
+
+========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  z-index: inherit;
+}
+
+html,
+body {
+  //line-height: $font-lheight;
+  font-size: percentage($font-size-default / 16px);
+  font-family: $font-family-base;
+  font-weight: 300;
+}
+
+html {
+  margin: 0 !important;
+  font-size: percentage($font-size-mobile / 16px); //16px
+
+  @include mq(sm) {
+    font-size: percentage($font-size-default / 16px); //16px
+  }
+}
+
+body {
+  position: relative;
+  margin: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: $color-text;
+  background-color: $color-background;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: always;
+
+  &.is-fixed {
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      width: 0 !important;
+    }
+  }
+
+  #wpadminbar {
+    position: fixed;
+  }
+}
+
+.outBannerWrapper {
+  position: relative;
+  background: $color-light;
+  z-index: 1;
+}
+
+button {
+  padding: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+b {
+  display: inline-block;
+}
+
+blockquote {
+  margin: 0;
+}
+
+//Remove text-shadow in selection highlight: h5bp.com/i
+//These selection declarations have to be separate.
+//Customize the background color to match your design.
+
+::-moz-selection { // scss-lint:disable VendorPrefix
+  color: $color-text-selection;
+  text-shadow: none;
+}
+
+::selection {
+  color: $color-text-selection;
+  text-shadow: none;
+}
+
+// Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+
+audio,
+canvas,
+iframe,
+svg,
+video,
+img {
+  vertical-align: middle;
+}
+
+// A better looking default horizontal rule
+
+hr {
+  display: block;
+  height: 1px;
+  margin: 1rem 0;
+  padding: 0;
+  border: 0;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+// Remove default fieldset styles.
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+// Allow only vertical resizing of textareas.
+
+textarea {
+  resize: vertical;
+}
+
+input::-moz-focus-inner {
+  border: 0;
+}
+
+/* ==========================================================================
+##prevent 300ms delay in FF, Chrome and IE on touch devices
+========================================================================== */
+
+a[href], // scss-lint:disable QualifyingElement
+button {
+  touch-action: manipulation;
+}
+
+/* ==========================================================================
+##Headings and Base
+
+1 to 6 heading
+
+```
+```
+========================================================================== */
+
+p {
+  margin: 0 0 0.2em;
+  line-height: $font-lheight;
+}
+
+strong {
+  font-weight: font-weight(light);
+}
+
+a:not([class]),
+a:not([class]):visited {
+  color: $color-link;
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+
+  @at-root .no-touchevents &:hover {
+    color: rgba($color-link, 0.6);
+  }
+}
+
+a.read-more,
+a.read-more:visited {
+  color: $color-red;
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+
+  @at-root .no-touchevents &:hover {
+    color: rgba($color-red, 0.6);
+  }
+}
+
+
+/* ==========================================================================
+## various
+========================================================================== */
+
+.svg-sprites {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.container-column {
+  max-width: $maximum-width;
+  margin: 0 auto;
+  position: relative;
+}
+
+.container-spacer {
+  position: relative;
+  margin-bottom: 10vh;
+
+  @include mq(sm) {
+    margin-bottom: 20vh;
+  }
+}
+
+#zoom-container,
+.medium-zoom-image--opened,
+.medium-zoom-overlay {
+  z-index: z-index(zoom);
+}
+
+#zoom-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 20px;
+}
+
+.padded-top {
+
+  @include mq(sm) {
+    padding-top: $big-margin;
+  }
+}
+
+[data-anim] {
+  @include boost-performance();
+}
+
+/* ==========================================================================
+## CSS to JS Breakpoint Bridge
+========================================================================== */
+
+body::after,
+body::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: z-index(behind) - 2;
+  display: block;
+  visibility: hidden;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+}
+
+body::after {
+  content: 'xs';
+
+  @each $mq-key, $mq-value in $mq-breakpoints {
+    @include mq($mq-key) {
+      content: '#{$mq-key}';
+    }
+  }
+}
+
+body::before {
+  content: '/#{map-to-JSON($mq-breakpoints)}/'; // scss-lint:disable NameFormat
+}
+
+//fallback
+head {
+  font-family: '/#{map-to-JSON($mq-breakpoints)}/'; // scss-lint:disable NameFormat
+}
+
+
+[data-cloak="true"] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.lazy {
+  opacity: 0;
+  transition: all 0.4s ease-out;
+
+  &.lazy-loaded {
+    opacity: 1;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.vue-slider:hover {
+
+  .vue-slider-process {
+    background-color: $color-red;
+  }
+
+  .vue-slider-dot-handle {
+    border: 2px solid $color-red;
+
+    &:hover {
+      border: 2px solid $color-red;
+    }
+  }
+}
+
+.vue-slider-rail {
+  background-color: #e1e1e1;
+}
+
+.vue-slider-dot-handle {
+  border: 2px solid $color-red;
+
+  &:hover {
+    border: 2px solid $color-red;
+  }
+
+  &-focus {
+    box-shadow: 0 0 0 5px rgba($color-red, 0.5);
+  }
+}
+
+.vue-slider-process {
+  background-color: $color-red;
+}
+
+
+
+
+blockquote:not([class]) {
+  p {
+    position: relative;
+    margin: 20px;
+    padding-left: 20px;
+    font-size: 20px;
+
+    &::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+      background: #000;
+      content: "";
+    }
+  }
+
+  &.is-style-large {
+    p {
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  cite {
+    display: block;
+    padding-left: 20px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,19 @@
+<div class="c-rows {{ align_class }}">
+	{% if fields.row %}
+		<ul class="slides">
+		{% for field in fields.row %}
+			<li class="slide">
+				{% if field.title %}
+					<h2>{{ field.title }}</h2>
+				{% endif %}
+				{% if field.image %}
+					<img src="{{ field.image.url }}" alt="{{ field.image.alt }}" />
+				{% endif %}
+				{% if field.content %}
+					{{ field.content }}
+				{% endif %}
+			</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+</div>

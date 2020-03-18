@@ -1,0 +1,35 @@
+
+
+.underline {
+    position: relative;
+    display: inline-block;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 50%;
+        z-index: -1;
+        transform: scaleX(1);
+        transition: transform 0.8s cubic-bezier(.06,.7,.32,.99) 1.2s;
+        transform-origin: 0 0;
+
+        @include mq(sm) {
+            transform: scaleX(0);
+        }
+    }
+
+    &--gray {
+        @extend .underline;
+        &::after {
+            background: $color-grey;
+        }
+    }
+}
+
+.underline.is-revealed::after {
+    transform: scaleX(1);
+}

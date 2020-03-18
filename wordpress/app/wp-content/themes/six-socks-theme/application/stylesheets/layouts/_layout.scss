@@ -1,0 +1,37 @@
+/* =============================================================================
+
+Layout
+====
+
+========================================================================== */
+
+/* ==========================================================================
+##Base Layouts
+========================================================================== */
+
+.l-row {
+  padding: 0 $small-margin;
+  margin-bottom: $standard-margin;
+
+  @include mq(sm) {
+    margin-bottom: $big-margin;
+    padding: 0 $standard-margin;
+  }
+}
+
+.l-grid {
+  @include mq(sm) {
+    display: grid;
+    grid-column-gap: 60px;
+    grid-row-gap: 60px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &--large {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &--fit {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

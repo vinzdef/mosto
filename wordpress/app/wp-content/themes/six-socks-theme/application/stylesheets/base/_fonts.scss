@@ -1,0 +1,82 @@
+@import './fonts-import.scss';
+
+//fonts by type
+$font-family-sans: 'GT America';
+
+//fonts by function
+$font-family-base: $font-family-sans;
+$font-family-extended: 'GT America Expanded';
+$font-family-h: $font-family-sans;
+
+//font dimensions
+$font-size-mobile: 14px;
+$font-size-default: 16px;
+
+$font-sizes: (
+  xxxl: ceil($font-size-default * 3.8),
+  xxl: ceil($font-size-default * 2.5),
+  quote: ceil($font-size-default * 2),
+  xl: ceil($font-size-default * 1.5),
+  l: ceil($font-size-default * 1.25),
+  m: $font-size-default,
+  s: ceil($font-size-default * 0.875),
+  xs: ceil($font-size-default * 0.75),
+  xxs: ceil($font-size-default * 0.625),
+);
+
+$font-weights: (
+  thin: 100,
+  extralight: 200,
+  light: 300,
+  regular: 400,
+  medium: 600,
+  bold: 800,
+  black: 900,
+);
+
+//font dimensions by function
+$font-sizes-headings: (
+  1: ceil($font-size-default * 3),
+  2: ceil($font-size-default * 2.8),
+  3: ceil($font-size-default * 2.5),
+  4: ceil($font-size-default * 2),
+  5: ceil($font-size-default * 1.25),
+  6: ceil($font-size-default * 1.125)
+);
+
+$font-sizes-headings-mobile: (
+  1: ceil($font-size-default * 3),
+  2: ceil($font-size-default * 2.4),
+  3: ceil($font-size-default * 2.5),
+  4: ceil($font-size-default * 2),
+  5: ceil($font-size-default * 1.25),
+  6: ceil($font-size-default * 1.125)
+);
+
+$font-size-text: $font-size-default;
+$font-lheight: 1.5;
+$font-lheight-h: 1.1;
+
+
+%heading-base {
+  margin: 0 0 0.2em;
+  font-family: $font-family-h;
+  font-weight: font-weight(bold);
+}
+
+@include classed-headings {
+  @extend %heading-base;
+}
+
+@each $font-head-num, $font-head-size in $font-sizes-headings {
+  h#{$font-head-num},
+  %h#{$font-head-num},
+  .h#{$font-head-num} {
+    font-size: font-size(map-get($font-sizes-headings-mobile, $font-head-num));
+    line-height: $font-lheight-h;
+
+    @include mq(sm) {
+      font-size: font-size($font-head-size);
+    }
+  }
+}

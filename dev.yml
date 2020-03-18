@@ -1,0 +1,73 @@
+# REF: https://github.com/mjstealey/wordpress-nginx-docker
+version: '3.5'
+
+volumes:
+  wordpress_data:
+  mysql_data:
+
+networks:
+  internal:
+  front-tier:
+    external:
+      name: front-tier
+
+services:
+  wordpress:
+    container_name: ${COMPOSE_PROJECT_NAME}_wordpress
+    volumes:
+      - wordpress_data:/var/www/html/
+      - ./wordpress/app/wp-content:/var/www/html/wp-content
+    environment:
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG', true);
+    depends_on:
+      - mysql
+    restart: always
+    networks:
+      internal:
+
+  mysql:
+    container_name: ${COMPOSE_PROJECT_NAME}_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    networks:
+      internal:
+
+  nginx:
+    container_name: ${COMPOSE_PROJECT_NAME}_nginx
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+    networks:
+      front-tier:
+      internal:
+        aliases:
+          - ${VIRTUAL_HOST}
+    volumes:
+      - wordpress_data:/var/www/html/
+      - ./wordpress/app/wp-content:/var/www/html/wp-content
+    depends_on:
+      - wordpress
+    restart: always
+
+  adminer:
+    container_name: ${COMPOSE_PROJECT_NAME}_adminer
+    image: adminer
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      VIRTUAL_HOST: adminer.${VIRTUAL_HOST}
+    depends_on:
+      - mysql
+    networks:
+      internal:
+      front-tier:
