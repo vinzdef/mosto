@@ -9,8 +9,11 @@
   },
   "main": "postcss.config.js",
   "dependencies": {
+    "gsap": "./gsap-bonus.tgz",
+    "normalize.css": "^8.0.1",
     "parcel-bundler": "^1.5.0",
-    "gsap": "./gsap-bonus.tgz"
+    "prevent-scroll": "^2.0.0",
+    "sass-mq": "^5.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
@@ -19,7 +22,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel ./static/site.js --hmr-hostname localhost",
+    "start": "parcel ./application/javascripts/application.js --hmr-hostname localhost",
     "build": "parcel build ./static/site.js"
   }
 }

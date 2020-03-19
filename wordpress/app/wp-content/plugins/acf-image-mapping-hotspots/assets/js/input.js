@@ -102,10 +102,8 @@
 		},
 
 		moveMarker = function() {
-
 			// move the marker
 			$fieldMarker.css( 'left', x ).css( 'top', y );
-
 		},
 
 		handleClick = function( e ) {
@@ -179,7 +177,7 @@
 	});
 
 	if( typeof acf.add_action !== 'undefined' ) {
-	
+
 		/*
 		*  ready append (ACF5)
 		*
@@ -193,26 +191,26 @@
 		*  @param	$el (jQuery selection) the jQuery element which contains the ACF fields
 		*  @return	n/a
 		*/
-		
+
 		acf.add_action('ready append', function( $el ){
-			
+
 			// search $el for fields of type 'image_mapping'
 			acf.get_fields({ type : 'image_mapping'}, $el).each(function(){
 
 				image_mapping( $(this) )();
-				
+
 			});
-			
+
 		});
-		
-		
+
+
 	} else {
-		
-		
+
+
 		/*
 		*  acf/setup_fields (ACF4)
 		*
-		*  This event is triggered when ACF adds any new elements to the DOM. 
+		*  This event is triggered when ACF adds any new elements to the DOM.
 		*
 		*  @type	function
 		*  @since	1.0.0
@@ -223,18 +221,18 @@
 		*
 		*  @return	n/a
 		*/
-		
+
 		// $(document).on('acf/setup_fields', function(e, postbox){
-			
+
 		// 	$(postbox).find('.field[data-field_type="image_mapping"]').each(function(){
-				
+
 		// 		initialize_field( $(this) );
-				
+
 		// 	});
-		
+
 		// });
-	
-	
+
+
 	}
 
 

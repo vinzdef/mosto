@@ -1,4 +1,9 @@
-<blockquote class="c-product">
-	<img src="{{ fields.image.src }}" alt="{{ fields.image.alt }}">
-	{{ fields.image_mapping }}
-</blockquote>
+{% extends "blocks/default-block.twig" %}
+
+{% block component %}
+<div class="c-product">
+	<div class="c-product__wrapper" data-points='[{{ fields.image_mapping }}]'>
+		<img src="{{ Image(fields.image) }}" alt="{{ fields.image.alt }}">
+	</div>
+</div>
+{% endblock %}

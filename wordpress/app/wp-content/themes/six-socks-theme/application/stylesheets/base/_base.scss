@@ -62,23 +62,6 @@ body {
   }
 }
 
-.outBannerWrapper {
-  position: relative;
-  background: $color-light;
-  z-index: 1;
-}
-
-button {
-  padding: 5px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
-}
-
 a {
   text-decoration: none;
   cursor: pointer;
@@ -118,7 +101,6 @@ img {
 }
 
 // A better looking default horizontal rule
-
 hr {
   display: block;
   height: 1px;
@@ -132,24 +114,6 @@ li {
   padding: 0;
   margin: 0;
   list-style: none;
-}
-
-// Remove default fieldset styles.
-
-fieldset {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-// Allow only vertical resizing of textareas.
-
-textarea {
-  resize: vertical;
-}
-
-input::-moz-focus-inner {
-  border: 0;
 }
 
 /* ==========================================================================
@@ -171,12 +135,8 @@ button {
 ========================================================================== */
 
 p {
-  margin: 0 0 0.2em;
+  margin: 0;
   line-height: $font-lheight;
-}
-
-strong {
-  font-weight: font-weight(light);
 }
 
 a:not([class]),
@@ -190,18 +150,6 @@ a:not([class]):visited {
   }
 }
 
-a.read-more,
-a.read-more:visited {
-  color: $color-red;
-  text-decoration: none;
-  transition: all 0.3s ease-out;
-
-  @at-root .no-touchevents &:hover {
-    color: rgba($color-red, 0.6);
-  }
-}
-
-
 /* ==========================================================================
 ## various
 ========================================================================== */
@@ -214,43 +162,6 @@ a.read-more:visited {
   height: 0;
   opacity: 0;
   visibility: hidden;
-}
-
-.container-column {
-  max-width: $maximum-width;
-  margin: 0 auto;
-  position: relative;
-}
-
-.container-spacer {
-  position: relative;
-  margin-bottom: 10vh;
-
-  @include mq(sm) {
-    margin-bottom: 20vh;
-  }
-}
-
-#zoom-container,
-.medium-zoom-image--opened,
-.medium-zoom-overlay {
-  z-index: z-index(zoom);
-}
-
-#zoom-container {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: 20px;
-}
-
-.padded-top {
-
-  @include mq(sm) {
-    padding-top: $big-margin;
-  }
 }
 
 [data-anim] {
@@ -293,99 +204,7 @@ head {
   font-family: '/#{map-to-JSON($mq-breakpoints)}/'; // scss-lint:disable NameFormat
 }
 
-
 [data-cloak="true"] {
   opacity: 0;
   visibility: hidden;
-}
-
-.lazy {
-  opacity: 0;
-  transition: all 0.4s ease-out;
-
-  &.lazy-loaded {
-    opacity: 1;
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.4s ease-out;
-}
-
-.fade-enter,
-.fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-
-.vue-slider:hover {
-
-  .vue-slider-process {
-    background-color: $color-red;
-  }
-
-  .vue-slider-dot-handle {
-    border: 2px solid $color-red;
-
-    &:hover {
-      border: 2px solid $color-red;
-    }
-  }
-}
-
-.vue-slider-rail {
-  background-color: #e1e1e1;
-}
-
-.vue-slider-dot-handle {
-  border: 2px solid $color-red;
-
-  &:hover {
-    border: 2px solid $color-red;
-  }
-
-  &-focus {
-    box-shadow: 0 0 0 5px rgba($color-red, 0.5);
-  }
-}
-
-.vue-slider-process {
-  background-color: $color-red;
-}
-
-
-
-
-blockquote:not([class]) {
-  p {
-    position: relative;
-    margin: 20px;
-    padding-left: 20px;
-    font-size: 20px;
-
-    &::after {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 4px;
-      background: #000;
-      content: "";
-    }
-  }
-
-  &.is-style-large {
-    p {
-      &::after {
-        display: none;
-      }
-    }
-  }
-
-  cite {
-    display: block;
-    padding-left: 20px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-  }
 }

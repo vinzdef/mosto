@@ -1,17 +1,31 @@
-{% if is_preview %}
-    <p>I will only appear in the editor.</p>
-{% endif %}
+{% extends "blocks/default-block.twig" %}
 
-<div class="c-slides">
-  <div style="background: {{fields.group_content.background}}">
-    <h1>{{ fields.group_content.title }}</h1>
-    <p>{{ fields.group_content.content }}</p>
-  </div>
-  <div style="background: {{fields.group_slides.background}}">
-    <div>
-      {% for slide in fields.group_slides.slides %}
-        <img src="{{slide.image.url}}" alt="">
-      {% endfor %}
+{% block component %}
+  {% if is_preview %}
+      <p>I will only appear in the editor.</p>
+  {% endif %}
+
+  <div class="c-slides {{ align_class }}" style="color: {{ fields.text_color }}">
+    <div class="c-slides__block" style="background: {{fields.group_content.background}}">
+      <div class="c-slides__content">
+        <div>
+          <h1>{{ fields.group_content.title }}</h1>
+          <p>{{ fields.group_content.content }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="c-slides__block" style="background: {{fields.group_slides.background}}">
+      <div class="c-slides__pictures">
+        {% for slide in fields.group_slides.slides %}
+          <div class="sticky">
+        {% endfor %}
+        {% for slide in fields.group_slides.slides %}
+            <div style="z-index: {{ loop.length - loop.index }}" class="c-slides__poster">
+              <img style="transform: rotateZ({{ random(-10, 10) }}deg)" src="{{slide.image.url}}" alt="{{slide.image.alt}}">
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
-</div>
+{% endblock %}

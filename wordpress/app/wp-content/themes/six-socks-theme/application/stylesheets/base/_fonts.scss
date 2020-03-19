@@ -5,7 +5,6 @@ $font-family-sans: 'GT America';
 
 //fonts by function
 $font-family-base: $font-family-sans;
-$font-family-extended: 'GT America Expanded';
 $font-family-h: $font-family-sans;
 
 //font dimensions
@@ -17,7 +16,7 @@ $font-sizes: (
   xxl: ceil($font-size-default * 2.5),
   quote: ceil($font-size-default * 2),
   xl: ceil($font-size-default * 1.5),
-  l: ceil($font-size-default * 1.25),
+  l: ceil($font-size-default * 1.125),
   m: $font-size-default,
   s: ceil($font-size-default * 0.875),
   xs: ceil($font-size-default * 0.75),
@@ -36,12 +35,11 @@ $font-weights: (
 
 //font dimensions by function
 $font-sizes-headings: (
-  1: ceil($font-size-default * 3),
-  2: ceil($font-size-default * 2.8),
-  3: ceil($font-size-default * 2.5),
-  4: ceil($font-size-default * 2),
-  5: ceil($font-size-default * 1.25),
-  6: ceil($font-size-default * 1.125)
+  1: ceil($font-size-default * 3.125),
+  2: ceil($font-size-default * 5),
+  3: ceil($font-size-default * 1.25),
+  4: ceil($font-size-default * 1.875),
+  5: ceil($font-size-default * 2.5)
 );
 
 $font-sizes-headings-mobile: (
@@ -49,8 +47,7 @@ $font-sizes-headings-mobile: (
   2: ceil($font-size-default * 2.4),
   3: ceil($font-size-default * 2.5),
   4: ceil($font-size-default * 2),
-  5: ceil($font-size-default * 1.25),
-  6: ceil($font-size-default * 1.125)
+  5: ceil($font-size-default * 1.25)
 );
 
 $font-size-text: $font-size-default;
@@ -59,9 +56,9 @@ $font-lheight-h: 1.1;
 
 
 %heading-base {
-  margin: 0 0 0.2em;
   font-family: $font-family-h;
-  font-weight: font-weight(bold);
+  font-weight: font-weight(regular);
+  margin: 0;
 }
 
 @include classed-headings {

@@ -1,6 +1,5 @@
-<div>
-  {% for parallax in layout.parallax %}
-    {{ parallax.image.src('medium') }}
-    <img src="{{ parallax.image.src }}" />
+<div class="o-parallax">
+  {% for parallax in fields.parallax %}
+    <img src="{{ Image(parallax.image).src('medium') }}" />
   {% endfor %}
 </div>

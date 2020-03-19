@@ -1,10 +1,19 @@
-<div class="c-rows {{ align_class }}">
-	<div style="color: {{ fields.text_color }}">
-		{{ fields.content }}
-	</div>
-	<div style="color: {{ fields.text_color }}">
+{% extends "blocks/default-block.twig" %}
+
+{% block component %}
+<div class="c-text{{ fields.fullscreen ? ' c-text--fullscreen ' : '' }}">
+	<div>
 		<div>
-			{{ fields.hidden_content }}
+			{{ fields.content }}
+			{% if fields.hidden_content %}
+				<button>Read More</button>
+			{% endif %}
+		</div>
+		<div class="c-text__hidden">
+			<div>
+				{{ fields.hidden_content }}
+			</div>
 		</div>
 	</div>
 </div>
+{% endblock %}

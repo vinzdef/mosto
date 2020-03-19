@@ -1,6 +1,9 @@
+{% extends "blocks/default-block.twig" %}
+
+{% block component %}
 <div class="c-rows {{ align_class }}">
 	{% if fields.row %}
-		<ul class="slides">
+		<ul class="c-rows__slides">
 		{% for field in fields.row %}
 			<li class="slide">
 				{% if field.title %}
@@ -17,3 +20,4 @@
 		</ul>
 	{% endif %}
 </div>
+{% endblock %}

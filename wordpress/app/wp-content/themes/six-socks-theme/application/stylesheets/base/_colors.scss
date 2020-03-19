@@ -1,14 +1,11 @@
 $color-dark: #000000;
-$color-light-grey: rgb(245, 245, 245);
 $color-light: #ffffff;
-// $color-red: #EE3434;
-// $color-red: rgb(237, 17, 37);
-$color-red: #4d07ff;
+$color-grey: #888888;
 $color-lightest-grey: #F8F8F8;
 
 //colors by function
 $color-text: $color-dark;
-$color-accent: $color-red;
+$color-accent: $color-grey;
 $color-background: $color-light;
 $color-border: $color-background;
 $color-link: $color-dark;

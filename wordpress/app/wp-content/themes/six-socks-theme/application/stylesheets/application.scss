@@ -2,9 +2,8 @@
 @import 'base/globals';
 
 //plugins
-@import 'sass-mq/mq';
-//base styles and mixins
-@import 'normalize.css/normalize';
+@import '~sass-mq/mq';
+// @import 'normalize.css/normalize';
 
 @import 'base/colors';
 @import 'base/mixins';
@@ -19,6 +18,15 @@
 
 @import 'layouts/layout';
 @import 'layouts/page';
+
+@import 'modules/component';
+@import 'modules/parallax';
+
+@import 'modules/text';
+@import 'modules/video';
+@import 'modules/product';
+@import 'modules/slides';
+@import 'modules/rows';
 
 //utility come last so they can overwrite stuff...
 @import 'base/utility';

@@ -97,6 +97,10 @@ class StarterSite extends Timber\Site {
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'menus' );
 
+		add_theme_support( 'editor-styles' );
+		add_theme_support( 'dark-editor-style' );
+		add_editor_style( 'style-editor.css' );
+
 		function register_acf_block_types() {
 			acf_register_block_type(array(
 				'name'              => 'text',
@@ -155,7 +159,7 @@ class StarterSite extends Timber\Site {
 			$context['fields'] = get_fields();
 			$context['is_preview'] = $is_preview;
 			$slug = str_replace('acf/', '', $block['name']);
-			$context['align_class'] = $block['align'] ? 'u-align--' . $block['align'] : '';
+			$context['align_class'] = $block['align'] ? 'u-text--' . $block['align'] : '';
 
 			Timber::render("templates/blocks/block-{$slug}.twig", $context );
 		}
@@ -177,10 +181,16 @@ class StarterSite extends Timber\Site {
 			return $allowed_blocks;
 		}
 
-		wp_register_script('application', get_template_directory_uri() . '/static/javascripts/application.js', array(), null, true );
+		wp_register_script('application', get_template_directory_uri() . '/dist/application.js', array(), null, true );
 		wp_enqueue_script('application');
-	}
 
+
+		add_action('admin_menu', 'remove_options');
+		function remove_options() {
+				remove_menu_page( 'edit.php' );
+				remove_menu_page( 'edit-comments.php' );
+		}
+	}
 
 	public function myfoo( $text ) {
 		$text .= ' bar!';
