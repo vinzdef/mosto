@@ -1,0 +1,25 @@
+.c-video {
+  margin: 0 auto;
+  padding: $big-margin;
+
+  video {
+    width: 100%;
+    max-width: $maximum-width;
+  }
+
+  .c-video__content {
+    position: absolute;
+    z-index: 2;
+    padding: $standard-margin;
+  }
+
+  &--fullscreen {
+    padding: 0;
+
+    video {
+      width: 100%;
+      max-width: none;
+    }
+  }
+
+}

@@ -1,0 +1,16 @@
+.c-rows {
+  width: 100%;
+
+  &__slides {
+    display: flex;
+    width: 100%;
+  }
+
+  .slide {
+    padding: $standard-margin;
+
+    img {
+      width: 100%;
+    }
+  }
+}

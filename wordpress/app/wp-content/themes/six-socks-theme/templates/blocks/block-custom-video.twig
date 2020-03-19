@@ -1,0 +1,11 @@
+{% extends "blocks/default-block.twig" %}
+
+{% block component %}
+<div class="c-video{{ fields.fullscreen ? ' c-video--fullscreen' : '' }}">
+  <div class="c-video__content{{ fields.content_position ? ' u-align u-align--' ~ fields.content_position : '' }}">
+    {{ fields.title }}
+    {{ fields.content }}
+  </div>
+  <video playsinline loop autoplay mute src="{{ fields.video.url }}" />
+</div>
+{% endblock %}

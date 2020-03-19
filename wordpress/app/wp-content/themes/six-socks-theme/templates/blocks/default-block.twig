@@ -1,0 +1,15 @@
+<div
+  class="o-component{{ align_class ? ' ' . align_class : '' }}{{ fields.background ? ' o-component--background-image' : ''}}"
+  style="
+  {{ fields.text_color ? 'color:' ~ fields.text_color ~ ';' : '' }}
+  {{ fields.background_color ? 'background-color:' ~ fields.background_color ~ ';' : '' }}
+  {{ fields.background ? 'background-image: url(' ~ fields.background.url ~ ');' : '' }}
+  "
+> 
+  <div class="o-component__wrapper">
+    {% block component %}
+      no data
+    {% endblock %}
+    {% include 'partials/parallax.twig' %}
+  </div>
+</div>
